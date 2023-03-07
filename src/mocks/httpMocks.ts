@@ -1,6 +1,6 @@
-import { type NextFunction, type Response } from "express";
+import { type NextFunction, type Response, type Request } from "express";
 
-export const request: Partial<Request> = {};
+export const request = {} as Partial<Request>;
 
 export const response: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
