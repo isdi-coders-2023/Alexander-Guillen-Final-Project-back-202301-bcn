@@ -17,3 +17,5 @@ const errorHandler = (
     .status(error.statusCode || 500)
     .json({ error: error.publicMessage || "Something went wrong" });
 };
+
+export default errorHandler;
