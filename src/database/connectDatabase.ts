@@ -2,7 +2,6 @@ import "../loadEnvironment.js";
 import mongoose from "mongoose";
 import createDebug from "debug";
 import chalk from "chalk";
-import type CustomError from "../CustomError/CustomError.js";
 
 const debug = createDebug("lingodeck:src:database:connect");
 
