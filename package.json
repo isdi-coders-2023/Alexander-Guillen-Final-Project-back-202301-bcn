@@ -8,7 +8,7 @@
     "build:dev": "tsc --watch",
     "start": "node dist/index.js",
     "test": "jest",
-    "test:coverage": "jest  --coverage --watchAll=false"
+    "test:coverage": "jest --coverage --watchAll=false"
   },
   "keywords": [],
   "author": "",
