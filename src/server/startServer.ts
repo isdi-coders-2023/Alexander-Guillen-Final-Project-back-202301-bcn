@@ -1,6 +1,7 @@
 import "../loadEnvironment.js";
 import chalk from "chalk";
 import createDebug from "debug";
+import type CustomError from "../CustomError/CustomError.js";
 import app from "./app.js";
 
 const debug = createDebug("lingodeck:src:server:startServer");
