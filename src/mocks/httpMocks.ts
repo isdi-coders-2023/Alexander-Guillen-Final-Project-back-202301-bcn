@@ -1,4 +1,4 @@
-import { type NextFunction, type Response, type Request } from "express";
+import { type Response, type Request } from "express";
 
 export const request: Partial<Request> = {};
 
