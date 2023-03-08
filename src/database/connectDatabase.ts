@@ -1,21 +1,26 @@
 import "../loadEnvironment.js";
 import mongoose from "mongoose";
 import createDebug from "debug";
-import chalk from "chalk";
 
 const debug = createDebug("lingodeck:src:database:connect");
 
 const connectDatabase = async (uri: string) => {
   mongoose.set("strictQuery", false);
+  mongoose.set("debug", true);
+  mongoose.set("toJSON", {
+    virtuals: true,
+    transform(doc, ret) {
+      delete ret._id;
+      delete ret.__v;
+    },
+  });
 
   try {
     await mongoose.connect(uri);
-    debug(chalk.green("Connected to the database"));
+    debug("Connected to the database");
   } catch (error) {
     debug(
-      chalk.red(
-        `Error while connecting to the database. ${(error as Error).message}`
-      )
+      `Error while connecting to the database. ${(error as Error).message}`
     );
   }
 };

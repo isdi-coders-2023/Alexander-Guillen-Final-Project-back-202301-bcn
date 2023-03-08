@@ -20,19 +20,18 @@ const loginUser = async (
     401,
     "username or password were incorrect"
   );
-
   try {
     const { password, username } = request.body;
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).exec();
 
     if (!user) {
-      next(wrongCredentialsError);
+      throw wrongCredentialsError;
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user!.password);
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      next(wrongCredentialsError);
+      throw wrongCredentialsError;
     }
 
     const userCredentialsTokenPayload = {
@@ -43,9 +42,9 @@ const loginUser = async (
     response.status(201).json({ token });
   } catch (error) {
     const loginGeneralError = new CustomError(
-      (error as Error).message,
-      500,
-      "There was an unexpected problem with the authentication"
+      (error as CustomError).message,
+      (error as CustomError).statusCode,
+      (error as CustomError).publicMessage
     );
 
     next(loginGeneralError);

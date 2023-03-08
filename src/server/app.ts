@@ -1,12 +1,28 @@
+import "../loadEnvironment.js";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import userRouter from "./routers/userRouter/userRouter.js";
+import endpointNotFound from "./middlewares/endpointNotFound/endpointNotFound.js";
+import errorHandler from "./middlewares/errorHandler/errorHandler.js";
 
 const app = express();
 
+const localHost = [
+  "http://localhost:4000",
+  `${process.env.DEPLOY_ORIGIN_URL!}`,
+];
+
+const options: cors.CorsOptions = {
+  origin: localHost,
+};
+
 app.disable("x-powered-by");
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors(options));
 app.use(express.json());
 
+app.use("/user", userRouter);
+app.use(endpointNotFound);
+app.use(errorHandler);
 export default app;

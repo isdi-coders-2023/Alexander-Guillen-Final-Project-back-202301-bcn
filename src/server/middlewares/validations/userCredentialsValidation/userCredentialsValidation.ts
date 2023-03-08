@@ -1,9 +1,14 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { Joi } from "express-validation";
 import CustomError from "../../../../CustomError/CustomError.js";
+import { type UserCredentials } from "../../../../types.js";
 
 const userCredentialsValidation = (
-  request: Request,
+  request: Request<
+    Record<string, unknown>,
+    Record<string, unknown>,
+    UserCredentials
+  >,
   response: Response,
   next: NextFunction
 ) => {
@@ -15,7 +20,6 @@ const userCredentialsValidation = (
   const { error } = credentialsValidation.validate(request.body, {
     abortEarly: false,
   });
-
   if (error) {
     const errorMessages = error.details
       .map((detail) => detail.message)
@@ -26,6 +30,8 @@ const userCredentialsValidation = (
       errorMessages
     );
     next(validationError);
+  } else {
+    next();
   }
 };
 
