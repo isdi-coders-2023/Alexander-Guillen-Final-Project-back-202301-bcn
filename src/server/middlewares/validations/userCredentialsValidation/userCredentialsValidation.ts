@@ -20,6 +20,7 @@ const userCredentialsValidation = (
   const { error } = credentialsValidation.validate(request.body, {
     abortEarly: false,
   });
+
   if (error) {
     const errorMessages = error.details
       .map((detail) => detail.message)
