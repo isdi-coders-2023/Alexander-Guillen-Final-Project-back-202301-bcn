@@ -8,7 +8,7 @@ import loginUser from "./loginUser";
 
 describe("Given a loginUser controller", () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   const message = "Wrong credentials";
@@ -22,10 +22,12 @@ describe("Given a loginUser controller", () => {
       };
       const expectedStatus = 201;
 
-      User.findOne = jest.fn().mockResolvedValue({
-        _id: "6407a2accaa85b5217cc1f44",
-        password: "usuario1",
-      });
+      User.findOne = jest.fn().mockImplementation(() => ({
+        exec: jest.fn().mockResolvedValue({
+          _id: "6407a2accaa85b5217cc1f44",
+          password: "usuario1",
+        }),
+      }));
 
       bcrypt.compare = jest
         .fn()
@@ -41,7 +43,7 @@ describe("Given a loginUser controller", () => {
       request.body = {
         username: "alexander",
         password: "usuario1",
-      } as UserCredentials;
+      };
 
       await loginUser(
         request as Request<
@@ -60,11 +62,14 @@ describe("Given a loginUser controller", () => {
 
   describe("When it receives a rsequest with username 'fakeAlexander'", () => {
     test("Then it should call next with error message 'Wrong credentials', status 401, and public message 'username or password were incorrect'", async () => {
-      User.findOne = jest.fn().mockResolvedValue(undefined);
+      User.findOne = jest.fn().mockImplementation(() => ({
+        exec: jest.fn().mockResolvedValue(undefined),
+      }));
+
       request.body = {
         username: "fakeAlexander",
         password: "usuario1",
-      } as UserCredentials;
+      };
 
       await loginUser(
         request as Request<
@@ -87,15 +92,17 @@ describe("Given a loginUser controller", () => {
 
   describe("When it receives a request with username with password 'fakeUsuario1'", () => {
     test("Then it call next with error message 'Wrong Credentials', status 401, and public message 'username or password were incorrect'", async () => {
-      User.findOne = jest.fn().mockResolvedValue({
-        _id: "6407a2accaa85b5217cc1f44",
-        password: "usuario1",
-      });
+      User.findOne = jest.fn().mockImplementation(() => ({
+        exec: jest.fn().mockResolvedValue({
+          _id: "6407a2accaa85b5217cc1f44",
+          password: "usuario1",
+        }),
+      }));
 
       request.body = {
         username: "alexander",
         password: "fakeUsuario1",
-      } as UserCredentials;
+      };
 
       bcrypt.compare = jest
         .fn()
