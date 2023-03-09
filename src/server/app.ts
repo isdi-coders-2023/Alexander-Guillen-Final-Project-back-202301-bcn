@@ -8,10 +8,7 @@ import errorHandler from "./middlewares/errorHandler/errorHandler.js";
 
 const app = express();
 
-const localHost = [
-  "http://localhost:4000",
-  `${process.env.DEPLOY_ORIGIN_URL!}`,
-];
+const localHost = process.env.ORIGIN_URL!;
 
 const options: cors.CorsOptions = {
   origin: localHost,

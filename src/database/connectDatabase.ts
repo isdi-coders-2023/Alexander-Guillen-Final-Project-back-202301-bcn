@@ -2,7 +2,7 @@ import "../loadEnvironment.js";
 import mongoose from "mongoose";
 import createDebug from "debug";
 
-const debug = createDebug("lingodeck:src:database:connect");
+const debug = createDebug("lingodeck:databaseConnect");
 
 const connectDatabase = async (uri: string) => {
   mongoose.set("strictQuery", false);
