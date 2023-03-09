@@ -3,7 +3,7 @@ import createDebug from "debug";
 import type CustomError from "../CustomError/CustomError.js";
 import app from "./app.js";
 
-const debug = createDebug("lingodeck:src:server:startServer");
+const debug = createDebug("lingodeck:startServer");
 
 const startServer = async (port: number) =>
   new Promise((resolve) => {
