@@ -4,7 +4,7 @@ import { type Response, type Request } from "express";
 import User from "../../../database/models/User";
 import { next, request, response } from "../../../mocks/httpMocks.js";
 import { type LoginResponse, type UserCredentials } from "../../../types.js";
-import loginUser from "./loginUser";
+import loginUser from "./userControllers";
 
 describe("Given a loginUser controller", () => {
   afterEach(() => {
