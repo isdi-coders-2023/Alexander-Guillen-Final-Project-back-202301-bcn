@@ -8,7 +8,7 @@ import app from "../../app";
 import User from "../../../database/models/User";
 import {
   type ResponseError,
-  type LoginResponse,
+  type Token,
   type UserCredentials,
 } from "../../../types";
 
@@ -38,7 +38,7 @@ describe("Given a POST /user/login endpoint", () => {
     await User.create(userAlexander);
   });
 
-  describe("When it receives a request with username 'alexander' and password 'usuario1'", () => {
+  describe.only("When it receives a request with username 'alexander' and password 'usuario1'", () => {
     test("Then it should respoand with token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", async () => {
       jwt.sign = jest
         .fn()
@@ -47,7 +47,7 @@ describe("Given a POST /user/login endpoint", () => {
         username: "alexander",
         password: "usuario1",
       };
-      const expectedToken: LoginResponse = {
+      const expectedToken: Token = {
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
       };
 

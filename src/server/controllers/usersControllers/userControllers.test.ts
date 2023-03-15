@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { type Response, type Request } from "express";
 import User from "../../../database/models/User";
 import { next, request, response } from "../../../mocks/data.js";
-import { type LoginResponse, type UserCredentials } from "../../../types.js";
+import { type Token, type UserCredentials } from "../../../types.js";
 import loginUser from "./userControllers";
 
 describe("Given a loginUser controller", () => {
@@ -17,7 +17,7 @@ describe("Given a loginUser controller", () => {
 
   describe("When it receives a request with username 'alexander' and passsword 'usuario1'", () => {
     test("Then it should return a response with token 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'", async () => {
-      const expectedToken: LoginResponse = {
+      const expectedToken: Token = {
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
       };
       const expectedStatus = 201;
