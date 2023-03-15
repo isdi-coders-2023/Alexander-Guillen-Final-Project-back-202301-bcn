@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type UserModel } from "../types";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -10,8 +11,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  flashcards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Flashcard" }],
 });
 
-const User = mongoose.model("User", userSchema, "users");
+const User = mongoose.model<UserModel>("User", userSchema, "users");
 
 export default User;

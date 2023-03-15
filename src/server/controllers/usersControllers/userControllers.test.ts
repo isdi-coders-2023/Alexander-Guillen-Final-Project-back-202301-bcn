@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { type Response, type Request } from "express";
 import User from "../../../database/models/User";
-import { next, request, response } from "../../../mocks/httpMocks.js";
+import { next, request, response } from "../../../mocks/data.js";
 import { type LoginResponse, type UserCredentials } from "../../../types.js";
 import loginUser from "./userControllers";
 

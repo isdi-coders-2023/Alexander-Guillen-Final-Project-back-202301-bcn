@@ -17,7 +17,7 @@ const loginUser = async (
 ) => {
   const wrongCredentialsError = new CustomError(
     "Wrong credentials",
-    401,
+    401,  
     "username or password were incorrect"
   );
   try {

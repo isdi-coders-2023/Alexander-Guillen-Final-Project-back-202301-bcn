@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
 import CustomError from "../../../CustomError/CustomError.js";
-import { next, request, response } from "../../../mocks/httpMocks.js";
+import { next, request, response } from "../../../mocks/data.js";
 import endpointNotFound from "./endpointNotFound";
 
 describe("Given an endpointNotFound middleware", () => {

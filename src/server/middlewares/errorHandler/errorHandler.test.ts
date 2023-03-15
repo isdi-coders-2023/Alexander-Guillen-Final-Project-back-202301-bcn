@@ -1,6 +1,6 @@
 import { type Response, type Request } from "express";
 import CustomError from "../../../CustomError/CustomError.js";
-import { next, request, response } from "../../../mocks/httpMocks.js";
+import { next, request, response } from "../../../mocks/data.js";
 import { type ResponseError } from "../../../types.js";
 import errorHandler from "./errorHandler.js";
 
