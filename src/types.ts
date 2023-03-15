@@ -1,8 +1,10 @@
+import { type Request } from "express";
+
 export interface ResponseError {
   error: string;
 }
 
-export interface LoginResponse {
+export interface Token {
   token: string;
 }
 export interface UserCredentials {
@@ -12,4 +14,8 @@ export interface UserCredentials {
 
 export interface UserId {
   id: string;
+}
+
+export interface CustomRequest extends Request {
+  userId: string;
 }
