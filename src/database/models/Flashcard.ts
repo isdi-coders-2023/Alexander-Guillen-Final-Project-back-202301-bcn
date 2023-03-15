@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { FlashcardModel } from "../types";
+import { type FlashcardModel } from "../types";
 
 const flashcardSchema = new mongoose.Schema({
   front: {
@@ -30,4 +30,4 @@ const Flashcard = mongoose.model<FlashcardModel>(
   "flashcards"
 );
 
-export default FlashcardModel;
+export default Flashcard;

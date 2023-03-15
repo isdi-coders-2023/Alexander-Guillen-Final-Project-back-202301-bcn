@@ -1,33 +1,28 @@
-import { type Request, type Response } from "express";
+import { type Response } from "express";
 import User from "../../../database/models/User";
-import { flashcards, next, request, response } from "../../../mocks/data";
-import { type UserId } from "../../../types";
-import { getFlahscards } from "./flashcardsControllers";
+import { mockFlashcards, next, response } from "../../../mocks/data";
+import { type CustomRequest } from "../../../types";
+import { getFlashcards } from "./flashcardsControllers";
 
 describe("Given a getFlashcards controller", () => {
   describe("When it receives a request with id '6409d298f5c4e943969fc56f'", () => {
     test("Then it should respond with status 200 and three flashcards", async () => {
-      User.findById = jest.fn().mockImplementationOnce(() => ({
-        populate: () => ({
-          exec: () => ({ flashcards }),
-        }),
-      }));
-      request.body = {
-        id: "6409d298f5c4e943969fc56f",
+      const request: Partial<CustomRequest> = {
+        userId: "6409d298f5c4e943969fc56f",
       };
 
-      await getFlahscards(
-        request as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          UserId
-        >,
-        response as Response,
-        next
-      );
+      User.findById = jest.fn().mockImplementationOnce(() => ({
+        populate: () => ({
+          exec: () => ({ flashcards: mockFlashcards }),
+        }),
+      }));
+
+      await getFlashcards(request as CustomRequest, response as Response, next);
 
       expect(response.status).toHaveBeenCalledWith(200);
-      expect(response.json).toHaveBeenCalledWith({ flashcards });
+      expect(response.json).toHaveBeenCalledWith({
+        flashcards: mockFlashcards,
+      });
     });
   });
 
@@ -41,19 +36,11 @@ describe("Given a getFlashcards controller", () => {
         }),
       }));
 
-      request.body = {
-        id: "7657e62f3cc2",
+      const request: Partial<CustomRequest> = {
+        userId: "6409d298f5c4e943969fc56f",
       };
 
-      await getFlahscards(
-        request as Request<
-          Record<string, unknown>,
-          Record<string, unknown>,
-          UserId
-        >,
-        response as Response,
-        next
-      );
+      await getFlashcards(request as CustomRequest, response as Response, next);
 
       expect(next.mock.calls[0][0]).toHaveProperty(
         "message",

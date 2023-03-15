@@ -7,9 +7,9 @@ export const response: Partial<Response> = {
   json: jest.fn(),
 };
 export const next = jest.fn();
-export const flashcards: FlashcardModel[] = [
+export const mockFlashcards: FlashcardModel[] = [
   {
-    id: "6409d298f5c4e943969fc56f",
+    id: "641129f79f3cfb43b4418b1e",
     back: "The capital city of France",
     front: "What is Paris?",
     image: "https://example.com/paris.jpg",
@@ -17,7 +17,7 @@ export const flashcards: FlashcardModel[] = [
     language: "English",
   },
   {
-    id: "63423234f1212f5c4e94396f",
+    id: "64112a0bc69ab057352c5014",
     back: "The chemical symbol for water",
     front: "What is H2O?",
     image: "https://example.com/h2o.jpg",
@@ -25,7 +25,7 @@ export const flashcards: FlashcardModel[] = [
     language: "English",
   },
   {
-    id: "640955559555453969fc56f",
+    id: "64112a1931db01e684891578",
     back: "The year the first iPhone was released",
     front: "What is 2007?",
     image: "https://example.com/iphone.jpg",
