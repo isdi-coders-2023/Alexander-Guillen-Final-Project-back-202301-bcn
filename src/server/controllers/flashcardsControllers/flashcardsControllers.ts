@@ -1,8 +1,8 @@
 import { type Response, type NextFunction } from "express";
-import CustomError from "../../../CustomError/CustomError";
-import User from "../../../database/models/User";
-import { type FlashcardModel } from "../../../database/types";
-import { type CustomRequest } from "../../../types";
+import CustomError from "../../../CustomError/CustomError.js";
+import User from "../../../database/models/User.js";
+import { type FlashcardModel } from "../../../database/types.js";
+import { type CustomRequest } from "../../../types.js";
 
 export const getFlashcards = async (
   request: CustomRequest,
