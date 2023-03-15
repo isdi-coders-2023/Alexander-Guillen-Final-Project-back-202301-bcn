@@ -13,10 +13,21 @@ export const getFlashcards = async (
     const id = request.userId;
 
     const user = await User.findById(id)
-      .populate<{ flashcards: FlashcardModel }>("flashcards")
+      .populate<{ flashcards: FlashcardModel[] }>("flashcards")
       .exec();
 
-    response.status(200).json({ flashcards: user?.flashcards });
+    const flashcards = user?.flashcards.map(
+      ({ language, back, front, id, image, imageBackup }) => ({
+        language,
+        back,
+        front,
+        id,
+        image,
+        imageBackup,
+      })
+    );
+
+    response.status(200).json({ flashcards });
   } catch (error) {
     const getFlashcardsError = new CustomError(
       (error as Error).message,
