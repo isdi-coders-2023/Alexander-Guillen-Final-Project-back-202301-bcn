@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
 import { type UserCredentials } from "../../../../types.js";
-import { next, request, response } from "../../../../mocks/httpMocks.js";
+import { next, request, response } from "../../../../mocks/data.js";
 import userCredentialsValidation from "./userCredentialsValidation.js";
 
 describe("Given an userCredentialsValidation middleware", () => {
