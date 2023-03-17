@@ -1,9 +1,9 @@
-import { type Request, type Response, type NextFunction } from "express";
+import { type Response, type NextFunction } from "express";
 import CustomError from "../../../CustomError/CustomError.js";
 import Flashcard from "../../../database/models/Flashcard.js";
 import User from "../../../database/models/User.js";
 import { type FlashcardModel } from "../../../database/types.js";
-import { type UserId, type CustomRequest } from "../../../types.js";
+import { type CustomRequest } from "../../../types.js";
 
 export const getFlashcards = async (
   request: CustomRequest,
@@ -46,8 +46,15 @@ export const deleteFlashcard = async (
   next: NextFunction
 ) => {
   try {
+    const idOfUser = request.userId;
     const { id } = request.params;
     const flashcard = await Flashcard.findByIdAndDelete(id).exec();
+
+    await User.findByIdAndUpdate(
+      idOfUser,
+      { $pull: { flashcards: id } },
+      { new: true }
+    ).exec();
 
     response.status(200).json({
       message: `Flashcard (${flashcard!.front} | ${

@@ -20,7 +20,7 @@ const auth = (
     }
 
     const token = authorizationHeader.replace(/^Bearer\s*/, "");
-    const { id } = jwt.verify(token, process.env.JWT_SECRET!) as UserId;
+    const { id } = jwt.verify(token, process.env.JWT_KEY!) as UserId;
 
     request.userId = id;
     next();
