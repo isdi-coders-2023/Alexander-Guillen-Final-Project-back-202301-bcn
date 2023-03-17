@@ -1,8 +1,9 @@
-import { type Response, type NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import CustomError from "../../../CustomError/CustomError.js";
+import Flashcard from "../../../database/models/Flashcard.js";
 import User from "../../../database/models/User.js";
 import { type FlashcardModel } from "../../../database/types.js";
-import { type CustomRequest } from "../../../types.js";
+import { type UserId, type CustomRequest } from "../../../types.js";
 
 export const getFlashcards = async (
   request: CustomRequest,
@@ -36,5 +37,30 @@ export const getFlashcards = async (
     );
 
     next(getFlashcardsError);
+  }
+};
+
+export const deleteFlashcard = async (
+  request: Request<UserId>,
+  response: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = request.params;
+    const flashcard = await Flashcard.findByIdAndDelete(id).exec();
+
+    response.status(200).json({
+      message: `Flashcard (${flashcard!.front} | ${
+        flashcard!.back
+      }) deleted succefully`,
+    });
+  } catch (error) {
+    const deleteFlashcardError = new CustomError(
+      (error as Error).message,
+      0,
+      "There was a problem deleting the flashcard"
+    );
+
+    next(deleteFlashcardError);
   }
 };
