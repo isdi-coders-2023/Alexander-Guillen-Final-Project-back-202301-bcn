@@ -41,7 +41,7 @@ export const getFlashcards = async (
 };
 
 export const deleteFlashcard = async (
-  request: Request<UserId>,
+  request: CustomRequest,
   response: Response,
   next: NextFunction
 ) => {
@@ -52,7 +52,7 @@ export const deleteFlashcard = async (
     response.status(200).json({
       message: `Flashcard (${flashcard!.front} | ${
         flashcard!.back
-      }) deleted succefully`,
+      }) deleted succesfully`,
     });
   } catch (error) {
     const deleteFlashcardError = new CustomError(

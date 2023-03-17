@@ -4,6 +4,10 @@ export interface ResponseError {
   error: string;
 }
 
+export interface ResponseMessage {
+  message: string;
+}
+
 export interface Token {
   token: string;
 }
@@ -18,4 +22,7 @@ export interface UserId {
 
 export interface CustomRequest extends Request {
   userId: string;
+  params: {
+    id: string;
+  };
 }
