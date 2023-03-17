@@ -61,6 +61,9 @@ describe("Given a getFlashcards controller", () => {
 });
 
 describe("Given a deleteFlashcard controller", () => {
+  User.findByIdAndUpdate = jest.fn().mockImplementation(() => ({
+    exec: () => undefined,
+  }));
   describe("When it receives a request with param id '641129f79f3cfb43b4418b1e'", () => {
     test("Then it should respond with status 200 and message 'Flashcard (What is Paris? | The capital city of France) deleted succefully'", async () => {
       const request: Partial<CustomRequest> = {
