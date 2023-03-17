@@ -63,7 +63,7 @@ describe("Given a getFlashcards controller", () => {
 describe("Given a deleteFlashcard controller", () => {
   describe("When it receives a request with param id '641129f79f3cfb43b4418b1e'", () => {
     test("Then it should respond with status 200 and message 'Flashcard (What is Paris? | The capital city of France) deleted succefully'", async () => {
-      const request: Partial<Request<UserId>> = {
+      const request: Partial<CustomRequest> = {
         params: {
           id: "641129f79f3cfb43b4418b1e",
         },
@@ -73,10 +73,10 @@ describe("Given a deleteFlashcard controller", () => {
       }));
       const expectedStatus = 200;
       const expectedMessage =
-        "Flashcard (What is Paris? | The capital city of France) deleted succefully";
+        "Flashcard (What is Paris? | The capital city of France) deleted succesfully";
 
       await deleteFlashcard(
-        request as Request<UserId>,
+        request as CustomRequest,
         response as Response,
         next
       );
@@ -106,7 +106,7 @@ describe("Given a deleteFlashcard controller", () => {
         "There was a problem deleting the flashcard";
 
       await deleteFlashcard(
-        request as Request<UserId>,
+        request as CustomRequest,
         response as Response,
         next
       );
