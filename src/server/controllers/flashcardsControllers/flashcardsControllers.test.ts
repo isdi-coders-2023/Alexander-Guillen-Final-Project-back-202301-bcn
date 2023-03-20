@@ -3,11 +3,7 @@ import Flashcard from "../../../database/models/Flashcard";
 import User from "../../../database/models/User";
 import { type FlashcardModel } from "../../../database/types";
 import { mockFlashcards, next, response } from "../../../mocks/data";
-import {
-  type UserId,
-  type CustomRequest,
-  type ResponseMessage,
-} from "../../../types";
+import { type UserId, type CustomRequest } from "../../../types";
 import {
   createFlashcard,
   deleteFlashcard,
@@ -18,8 +14,8 @@ beforeEach(() => {
   next.mockClear();
 });
 
-describe.only("Given a getFlashcards controller", () => {
-  describe.only("When it receives a request with id '6409d298f5c4e943969fc56f'", () => {
+describe("Given a getFlashcards controller", () => {
+  describe("When it receives a request with id '6409d298f5c4e943969fc56f'", () => {
     test("Then it should respond with status 200 and three flashcards", async () => {
       const request: Partial<CustomRequest> = {
         userId: "6409d298f5c4e943969fc56f",
@@ -146,15 +142,13 @@ describe("Given a deleteFlashcard controller", () => {
 });
 
 describe("Given a createFlashcard controller", () => {
-  describe("When it receives a request with id '6409d298f5c4e943969fc56f' and a flashcard", () => {
-    test("Then it should repond with message 'Flashcard ('What is Paris?' | 'The capital city of France') created succesfully'", async () => {
+  describe.only("When it receives a request with id '6409d298f5c4e943969fc56f' and a flashcard", () => {
+    test.only("Then it should repond with message 'Flashcard ('What is Paris?' | 'The capital city of France') created succesfully'", async () => {
       const request: Partial<CustomRequest> = {
         userId: "6409d298f5c4e943969fc56f",
         body: mockFlashcards[0],
       };
-      const expectedMessage: ResponseMessage = {
-        message: `Flashcard (What is Paris? | The capital city of France) created succesfully`,
-      };
+      const flashcard = mockFlashcards[0];
 
       Flashcard.create = jest.fn().mockResolvedValue(mockFlashcards[0]);
 
@@ -169,7 +163,9 @@ describe("Given a createFlashcard controller", () => {
       );
 
       expect(response.status).toHaveBeenCalledWith(201);
-      expect(response.json).toHaveBeenCalledWith(expectedMessage);
+      expect(response.json).toHaveBeenCalledWith(
+        expect.objectContaining({ flashcard })
+      );
     });
   });
 

@@ -77,16 +77,16 @@ export const createFlashcard = async (
   next: NextFunction
 ) => {
   try {
-    const flashcard = request.body;
+    const requestFlashcard = request.body;
     const { userId } = request;
 
-    const newFlashcardDocument = await Flashcard.create(flashcard);
+    const flashcard = await Flashcard.create(requestFlashcard);
     await User.findByIdAndUpdate(userId, {
-      $addToSet: { flashcards: newFlashcardDocument._id },
+      $addToSet: { flashcards: flashcard._id },
     }).exec();
 
     response.status(201).json({
-      message: `Flashcard (${newFlashcardDocument.front} | ${newFlashcardDocument.back}) created succesfully`,
+      flashcard,
     });
   } catch (error) {
     const createFlashcardError = new CustomError(
