@@ -1,5 +1,5 @@
 import { type Response, type Request } from "express";
-import { type MockFlashcards, type FlashcardModel } from "../database/types";
+import { type MockFlashcards } from "../database/types";
 
 export const request: Partial<Request> = {};
 export const response: Partial<Response> = {

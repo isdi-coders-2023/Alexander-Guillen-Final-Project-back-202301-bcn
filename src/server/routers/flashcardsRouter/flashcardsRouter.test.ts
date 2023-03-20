@@ -12,6 +12,7 @@ import {
   type ResponseError,
   type ResponseMessage,
 } from "../../../types";
+import { type FlashcardStructure } from "../../../database/types";
 
 let server: MongoMemoryServer;
 
@@ -114,6 +115,51 @@ describe("Given a DELETE /flashcards/:id endpoint", () => {
 
       const response = await request(app)
         .delete(`/flashcards/${id}`)
+        .set("Authorization", authorizationHeader)
+        .expect(500);
+
+      expect(response.body).toStrictEqual(expectedError);
+    });
+  });
+});
+
+describe("Given a POST /flashcards endpoint", () => {
+  const flashcard: FlashcardStructure = {
+    front: "Cat",
+    back: "Gato",
+    language: "English",
+    image: "http://example.image.com/image.jpg",
+  };
+
+  describe("When it receives a request with Authorization Header 'Bearer RISERO?rYsLDYo-6?3RMUSsizfbEqj0/?Q!cFZfo' and a flashcard", () => {
+    test("Then it should respond with status 201 and message 'Flashcard (Cat | Gato) created succesfully'", async () => {
+      const expectedMessage: ResponseMessage = {
+        message: "Flashcard (Cat | Gato) created succesfully",
+      };
+
+      const response = await request(app)
+        .post("/flashcards")
+        .send(flashcard)
+        .set("Authorization", authorizationHeader)
+        .expect(201);
+
+      expect(response.body).toStrictEqual(expectedMessage);
+    });
+  });
+
+  describe("When it receives a request with Authorization Header 'Bearer RISERO?rYsLDYo-6?3RMUSsizfbEqj0/?Q!cFZfo' and just a front and back", () => {
+    test("Then it should respond with status 500 and message 'There was a problem creating the flashcard'", async () => {
+      const mockFlashcard: Pick<FlashcardStructure, "front" | "back"> = {
+        front: flashcard.front,
+        back: flashcard.back,
+      };
+      const expectedError: ResponseError = {
+        error: "There was a problem creating the flashcard",
+      };
+
+      const response = await request(app)
+        .post("/flashcards")
+        .send(mockFlashcard)
         .set("Authorization", authorizationHeader)
         .expect(500);
 
