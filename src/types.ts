@@ -9,6 +9,10 @@ export interface ResponseMessage {
   message: string;
 }
 
+export interface ResponseFlashcard {
+  flashcard: FlashcardStructure;
+}
+
 export interface Token {
   token: string;
 }

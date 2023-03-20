@@ -143,7 +143,14 @@ describe("Given a POST /flashcards endpoint", () => {
         .set("Authorization", authorizationHeader)
         .expect(201);
 
-      expect(response.body).toStrictEqual(expectedMessage);
+      expect(response.body).toStrictEqual(
+        expect.objectContaining({
+          flashcard: {
+            ...flashcard,
+            id: expect.any(String) as string,
+          },
+        })
+      );
     });
   });
 
