@@ -18,13 +18,12 @@ export const getFlashcards = async (
       .exec();
 
     const flashcards = user?.flashcards.map(
-      ({ language, back, front, id, image, imageBackup }) => ({
+      ({ language, back, front, id, image }) => ({
         language,
         back,
         front,
         id,
         image,
-        imageBackup,
       })
     );
 
@@ -69,5 +68,33 @@ export const deleteFlashcard = async (
     );
 
     next(deleteFlashcardError);
+  }
+};
+
+export const createFlashcard = async (
+  request: CustomRequest,
+  response: Response,
+  next: NextFunction
+) => {
+  try {
+    const flashcard = request.body;
+    const { userId } = request;
+
+    const newFlashcardDocument = await Flashcard.create(flashcard);
+    await User.findByIdAndUpdate(userId, {
+      $addToSet: { flashcards: newFlashcardDocument._id },
+    }).exec();
+
+    response.status(201).json({
+      message: `Flashcard (${newFlashcardDocument.front} | ${newFlashcardDocument.back}) created succesfully`,
+    });
+  } catch (error) {
+    const createFlashcardError = new CustomError(
+      (error as Error).message,
+      0,
+      "There was a problem creating the flashcard"
+    );
+
+    next(createFlashcardError);
   }
 };

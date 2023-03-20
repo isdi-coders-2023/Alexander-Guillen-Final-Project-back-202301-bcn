@@ -1,4 +1,5 @@
 import { type Request } from "express";
+import { type FlashcardModel } from "./database/types";
 
 export interface ResponseError {
   error: string;
@@ -25,4 +26,5 @@ export interface CustomRequest extends Request {
   params: {
     id: string;
   };
+  body: FlashcardModel;
 }
