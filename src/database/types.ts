@@ -5,7 +5,6 @@ export interface FlashcardModel {
   front: string;
   back: string;
   image: string;
-  imageBackup: string;
   language: string;
 }
 
