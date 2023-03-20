@@ -60,6 +60,7 @@ describe("Given a GET /flashcards controller", () => {
       expect(response.body).toStrictEqual({ flashcards: mockFlashcards });
     });
   });
+
   const error: ResponseError = {
     error: "Invalid token",
   };
