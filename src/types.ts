@@ -1,5 +1,5 @@
 import { type Request } from "express";
-import { type FlashcardModel } from "./database/types";
+import { type FlashcardStructure } from "./database/types";
 
 export interface ResponseError {
   error: string;
@@ -26,5 +26,5 @@ export interface CustomRequest extends Request {
   params: {
     id: string;
   };
-  body: FlashcardModel;
+  body: FlashcardStructure;
 }

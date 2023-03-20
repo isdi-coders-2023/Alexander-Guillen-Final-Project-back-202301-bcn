@@ -18,11 +18,11 @@ export const getFlashcards = async (
       .exec();
 
     const flashcards = user?.flashcards.map(
-      ({ language, back, front, id, image }) => ({
+      ({ language, back, front, image, _id }) => ({
         language,
         back,
         front,
-        id,
+        id: _id,
         image,
       })
     );
