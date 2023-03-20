@@ -14,10 +14,6 @@ const flashcardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imageBackup: {
-    type: String,
-    required: true,
-  },
   language: {
     type: String,
     required: true,

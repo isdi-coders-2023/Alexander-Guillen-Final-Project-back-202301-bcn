@@ -13,7 +13,6 @@ export const mockFlashcards: FlashcardModel[] = [
     back: "The capital city of France",
     front: "What is Paris?",
     image: "https://example.com/paris.jpg",
-    imageBackup: "https://example.com/paris_backup.jpg",
     language: "English",
   },
   {
@@ -21,7 +20,6 @@ export const mockFlashcards: FlashcardModel[] = [
     back: "The chemical symbol for water",
     front: "What is H2O?",
     image: "https://example.com/h2o.jpg",
-    imageBackup: "https://example.com/h2o_backup.jpg",
     language: "English",
   },
   {
@@ -29,7 +27,6 @@ export const mockFlashcards: FlashcardModel[] = [
     back: "The year the first iPhone was released",
     front: "What is 2007?",
     image: "https://example.com/iphone.jpg",
-    imageBackup: "https://example.com/iphone_backup.jpg",
     language: "English",
   },
 ];
