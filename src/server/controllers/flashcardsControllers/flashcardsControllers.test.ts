@@ -18,16 +18,24 @@ beforeEach(() => {
   next.mockClear();
 });
 
-describe("Given a getFlashcards controller", () => {
-  describe("When it receives a request with id '6409d298f5c4e943969fc56f'", () => {
+describe.only("Given a getFlashcards controller", () => {
+  describe.only("When it receives a request with id '6409d298f5c4e943969fc56f'", () => {
     test("Then it should respond with status 200 and three flashcards", async () => {
       const request: Partial<CustomRequest> = {
         userId: "6409d298f5c4e943969fc56f",
       };
 
+      const flashcardsWithUnderscore = mockFlashcards.map((mockFlashcard) =>
+        Object.defineProperty(mockFlashcard, "_id", {
+          value: mockFlashcard.id,
+        })
+      );
+
       User.findById = jest.fn().mockImplementationOnce(() => ({
         populate: () => ({
-          exec: () => ({ flashcards: mockFlashcards }),
+          exec: () => ({
+            flashcards: flashcardsWithUnderscore,
+          }),
         }),
       }));
 

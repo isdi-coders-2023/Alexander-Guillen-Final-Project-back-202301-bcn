@@ -1,5 +1,5 @@
 import { type Response, type Request } from "express";
-import { type FlashcardModel } from "../database/types";
+import { type MockFlashcards } from "../database/types";
 
 export const request: Partial<Request> = {};
 export const response: Partial<Response> = {
@@ -7,7 +7,7 @@ export const response: Partial<Response> = {
   json: jest.fn(),
 };
 export const next = jest.fn();
-export const mockFlashcards: FlashcardModel[] = [
+export const mockFlashcards: MockFlashcards[] = [
   {
     id: "641129f79f3cfb43b4418b1e",
     back: "The capital city of France",
